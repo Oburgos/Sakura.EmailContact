@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.808.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.EmailContact", "Sakura.EmailContact\Sakura.EmailContact.csproj", "{9BFE4E29-C3F2-4783-8E38-3A0ACF003E61}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sakura.EmailContact.Tests", "Sakura.EmailContact.Tests\Sakura.EmailContact.Tests.csproj", "{4674EFAF-5D87-4531-9B61-0CFB9868F29F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{9BFE4E29-C3F2-4783-8E38-3A0ACF003E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BFE4E29-C3F2-4783-8E38-3A0ACF003E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BFE4E29-C3F2-4783-8E38-3A0ACF003E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4674EFAF-5D87-4531-9B61-0CFB9868F29F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4674EFAF-5D87-4531-9B61-0CFB9868F29F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4674EFAF-5D87-4531-9B61-0CFB9868F29F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4674EFAF-5D87-4531-9B61-0CFB9868F29F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
