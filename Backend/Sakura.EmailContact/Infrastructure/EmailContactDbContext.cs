@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Sakura.EmailContact.Infrastructure.Maps;
 
 namespace Sakura.EmailContact.Infrastructure
 {
@@ -12,6 +13,8 @@ namespace Sakura.EmailContact.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ContactMap());
+            modelBuilder.ApplyConfiguration(new ContactListMap());
         }
     }
 }

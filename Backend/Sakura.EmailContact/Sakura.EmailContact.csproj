@@ -21,5 +21,6 @@
     <Folder Include="Infrastructure\Core\" />
     <Folder Include="Features\" />
     <Folder Include="Features\Contacts\" />
+    <Folder Include="Features\Common\" />
   </ItemGroup>
 </Project>
