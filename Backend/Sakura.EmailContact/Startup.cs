@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Sakura.EmailContact.Infrastructure;
 
 namespace Sakura.EmailContact
 {
@@ -28,6 +30,11 @@ namespace Sakura.EmailContact
         {
 
             services.AddControllers();
+
+            services.AddDbContext<EmailContactDbContext>(options => {
+                options.UseNpgsql(Configuration.GetConnectionString("EmailContactDbPostgres"));
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sakura.EmailContact", Version = "v1" });
