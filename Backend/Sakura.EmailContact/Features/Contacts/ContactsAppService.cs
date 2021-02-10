@@ -1,18 +1,38 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Sakura.EmailContact.Features.Common;
+using Sakura.EmailContact.Features.Contacts.Dtos;
+using Sakura.EmailContact.Infrastructure.Core;
 
 namespace Sakura.EmailContact.Features.Contacts
 {
     public class ContactsAppService
     {
-        public ContactsAppService()
+        private readonly IUnitOfWork unitOfWork;
+
+        public ContactsAppService(IUnitOfWork unitOfWork)
         {
+            this.unitOfWork = unitOfWork;
         }
 
-        public EntityResponse CreateContact()
+        public async Task<EntityResponse<ContactDto>> CreateContactAsync(AddContactDto newContactDto)
         {
+            var result = ModelValidator.Validate(newContactDto, "E0001").As<ContactDto>();
+            if (!result.Ok)
+            {
+                return result;
+            }
 
-            return EntityResponse.CreateOk();
+            Contact contact = newContactDto.CreateEntity();
+            await unitOfWork.GetRepository<Contact>().AddAsync(contact);
+            await unitOfWork.SaveChangesAsync();
+            ContactDto dto = new ContactDto
+            {
+                Email = contact.Email,
+                Id = contact.Id,
+                Name = contact.Name
+            };
+            return EntityResponse.CreateOk().As(dto);
         }
     }
 }

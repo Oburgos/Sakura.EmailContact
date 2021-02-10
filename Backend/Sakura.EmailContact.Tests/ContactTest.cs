@@ -7,6 +7,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Sakura.EmailContact.Features.Common;
 using Sakura.EmailContact.Features.Contacts;
+using Sakura.EmailContact.Features.Contacts.Dtos;
+using Sakura.EmailContact.Infrastructure.Core;
 
 namespace Sakura.EmailContact.Tests
 {
@@ -22,13 +24,23 @@ namespace Sakura.EmailContact.Tests
         public void Contacts_ValidateContactInformation()
         {
             //Arrange
-            var httpCtx = new Mock<HttpContext>();
-            var ctr = new ContactsController();
-            ctr.ModelState.Clear();
-            ctr.ControllerContext.HttpContext = httpCtx.Object;
-            var response = ctr.Create(new Features.Contacts.Dtos.AddContactDto());
-            //EntityResponse result = (response.Result as BadRequestObjectResult).Value as EntityResponse;
-            BadRequestObjectResult result = (response.Result as BadRequestObjectResult);
+            var unitOfWork = new Mock<IUnitOfWork>();
+            var repository = new Mock<IRepository<Contact>>();
+            unitOfWork.Setup(e => e.GetRepository<Contact>()).Returns(repository.Object);
+            var appService = new ContactsAppService(unitOfWork.Object);
+            var createDto = new AddContactDto();
+
+            //Act
+            var result = appService.CreateContactAsync(createDto).GetAwaiter().GetResult();
+
+            createDto.Name = "Omar";
+            var result2 = appService.CreateContactAsync(createDto).GetAwaiter().GetResult();
+
+            //Assert
+            Assert.AreEqual(expected: false, result.Ok);
+            Assert.AreEqual(expected: "E0001", result.MessageCode);
+            Assert.AreEqual(expected: "The name is required", result.Message);
+            Assert.AreEqual(expected: "The email is required", result2.Message);
         }
     }
 }

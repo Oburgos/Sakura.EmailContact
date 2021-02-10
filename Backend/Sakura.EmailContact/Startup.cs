@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Sakura.EmailContact.Features.Contacts;
 using Sakura.EmailContact.Infrastructure;
 using Sakura.EmailContact.Infrastructure.Core;
 
@@ -40,6 +41,8 @@ namespace Sakura.EmailContact
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sakura.EmailContact", Version = "v1" });
             });
+
+            services.AddTransient<ContactsAppService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
