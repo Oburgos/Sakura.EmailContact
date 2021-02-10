@@ -72,6 +72,7 @@ namespace Sakura.EmailContact
                                             });
             });
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ContactsAppService>();
 
             ConfigureSecurity(services);

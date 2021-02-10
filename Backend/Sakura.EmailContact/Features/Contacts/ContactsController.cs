@@ -9,7 +9,7 @@ using Sakura.EmailContact.Features.Contacts.Dtos;
 namespace Sakura.EmailContact.Features.Contacts
 {
     [Route("api/[controller]")]
-    [ApiController, Authorize]
+    [ApiController]
     public class ContactsController: ControllerBase
     {
         private readonly ContactsAppService _contactsAppService;
@@ -28,6 +28,44 @@ namespace Sakura.EmailContact.Features.Contacts
                 return BadRequest(result);
             }
             return result.Data;
+        }
+
+       
+
+        [HttpGet("")]
+        public async Task<ActionResult<List<ContactDto>>> GetContactsAsync()
+        {
+            List<ContactDto> result = await _contactsAppService.GetContactsAsync();
+            return result;
+        }
+
+        [HttpPost("lists")]
+        public async Task<ActionResult<ContactListDto>> CreateListAsync([FromBody] AddContactListDto contactDto)
+        {
+            var result = await _contactsAppService.CreateContactListAsync(contactDto);
+            if (!result.Ok)
+            {
+                return BadRequest(result);
+            }
+            return result.Data;
+        }
+
+        [HttpPost("lists/{listId}/contacts")]
+        public async Task<ActionResult<ContactListDto>> AddContactToListAsync(int listId, [FromBody] List<int> contactsId)
+        {
+            var result = await _contactsAppService.AddContactToListAsync(listId, contactsId);
+            if (!result.Ok)
+            {
+                return BadRequest(result);
+            }
+            return result.Data;
+        }
+
+        [HttpGet("lists/{id}")]
+        public async Task<ActionResult<ContactListDto>> GetContactListAsync(int id)
+        {
+            var result = await _contactsAppService.GetContactListAsync(id);
+            return result;
         }
     }
 }

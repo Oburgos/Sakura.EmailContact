@@ -12,6 +12,6 @@ namespace Sakura.EmailContact.Features.Contacts
 
         public string Name { get; set; }
         public string Email { get; set; }
-        public List<ContactList> Lists { get; set; }
+        public List<ContactList> Lists { get; set; } = new List<ContactList>();
     }
 }
