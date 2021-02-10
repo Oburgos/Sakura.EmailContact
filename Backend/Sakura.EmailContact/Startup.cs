@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sakura.EmailContact.Features.Contacts;
 using Sakura.EmailContact.Infrastructure;
@@ -40,9 +45,52 @@ namespace Sakura.EmailContact
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sakura.EmailContact", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                 {
+                     Description = "JWT Authorization header",
+                     Name = "Authorization",
+                     In = ParameterLocation.Header,
+                     Type = SecuritySchemeType.ApiKey,
+                     Scheme = "Bearer"
+                 });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                                          {
+                                            {
+                                              new OpenApiSecurityScheme
+                                              {
+                                                Reference = new OpenApiReference
+                                                  {
+                                                    Type = ReferenceType.SecurityScheme,
+                                                    Id = "Bearer"
+                                                  },
+                                                  Scheme = "oauth2",
+                                                  Name = "Bearer",
+                                                  In = ParameterLocation.Header,
+                                                },
+                                                new List<string>()
+                                              }
+                                            });
             });
 
             services.AddTransient<ContactsAppService>();
+
+            ConfigureSecurity(services);
+        }
+
+        private void ConfigureSecurity(IServiceCollection services)
+        {
+            string domain = $"https://{Configuration["Auth0:Domain"]}/";
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = domain;
+                    options.Audience = Configuration["Auth0:Audience"];
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = ClaimTypes.NameIdentifier
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,6 +107,7 @@ namespace Sakura.EmailContact
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

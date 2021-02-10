@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sakura.EmailContact.Features.Common;
 using Sakura.EmailContact.Features.Contacts.Dtos;
@@ -8,7 +9,7 @@ using Sakura.EmailContact.Features.Contacts.Dtos;
 namespace Sakura.EmailContact.Features.Contacts
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController, Authorize]
     public class ContactsController: ControllerBase
     {
         private readonly ContactsAppService _contactsAppService;
