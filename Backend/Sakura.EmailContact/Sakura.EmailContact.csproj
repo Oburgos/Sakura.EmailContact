@@ -25,5 +25,8 @@
     <Folder Include="Features\Contacts\" />
     <Folder Include="Features\Common\" />
     <Folder Include="Features\Contacts\Dtos\" />
+    <Folder Include="Features\Campaigns\" />
+    <Folder Include="Features\Campaigns\Dtos\" />
+    <Folder Include="Features\EmailTemplates\" />
   </ItemGroup>
 </Project>

@@ -15,6 +15,9 @@ namespace Sakura.EmailContact.Infrastructure
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new ContactMap());
             modelBuilder.ApplyConfiguration(new ContactListMap());
+            modelBuilder.ApplyConfiguration(new EmailTemplateMap());
+            modelBuilder.ApplyConfiguration(new CampaignMap());
+            modelBuilder.ApplyConfiguration(new CampaignEventMap());
         }
     }
 }
