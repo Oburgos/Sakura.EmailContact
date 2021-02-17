@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.Json.Serialization;
+
 namespace Sakura.EmailContact.Features.Common
 {
     public class EntityResponse
@@ -6,6 +8,7 @@ namespace Sakura.EmailContact.Features.Common
         public bool Ok { get; set; }
         public string Message { get; set; }
         public string MessageCode { get; set; }
+        public object ErrorData { get; set; }
 
         public static EntityResponse CreateOk(string message = "", string codeMessage = "")
         {
@@ -17,13 +20,14 @@ namespace Sakura.EmailContact.Features.Common
             };
         }
 
-        public static EntityResponse CreateError(string message, string codeMessage)
+        public static EntityResponse CreateError(string message, string codeMessage, object errorData = null)
         {
             return new EntityResponse()
             {
                 Message = message,
                 MessageCode = codeMessage,
                 Ok = false,
+                ErrorData = errorData
             };
         }
 
@@ -52,37 +56,5 @@ namespace Sakura.EmailContact.Features.Common
     public class EntityResponse<T> : EntityResponse
     {
         public T Data { get; set; }
-
-        public static EntityResponse<T2> CreateOk<T2>(T2 data, string message = "", string codeMessage = "")
-        {
-            return new EntityResponse<T2>()
-            {
-                Message = message,
-                MessageCode = codeMessage,
-                Ok = true,
-                Data = data
-            };
-        }
-
-        public static EntityResponse<T2> CreateError<T2>(string message, string codeMessage, bool ok = false)
-        {
-            return new EntityResponse<T2>()
-            {
-                Message = message,
-                MessageCode = codeMessage,
-                Ok = ok,
-            };
-        }
-
-        public static EntityResponse<T2> CreateError<T2>(T2 data, string message, string codeMessage, bool ok = false)
-        {
-            return new EntityResponse<T2>()
-            {
-                Message = message,
-                MessageCode = codeMessage,
-                Ok = ok,
-                Data = data
-            };
-        }
     }
 }

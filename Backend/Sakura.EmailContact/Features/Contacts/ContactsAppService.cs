@@ -27,7 +27,7 @@ namespace Sakura.EmailContact.Features.Contacts
 
         public async Task<EntityResponse<ContactDto>> CreateContactAsync(AddContactDto newContactDto)
         {
-            var result = ModelValidator.Validate(newContactDto, "E0001").As<ContactDto>();
+            var result = ModelValidator.ValidateAsEntityValidation(newContactDto, "E0001").As<ContactDto>();
             if (!result.Ok)
             {
                 return result;
@@ -47,7 +47,7 @@ namespace Sakura.EmailContact.Features.Contacts
 
         public async Task<EntityResponse<ContactListDto>> CreateContactListAsync(AddContactListDto newContactListDto)
         {
-            var result = ModelValidator.Validate(newContactListDto, "E0002").As<ContactListDto>();
+            var result = ModelValidator.ValidateAsEntityValidation(newContactListDto, "E0002").As<ContactListDto>();
             if (!result.Ok)
             {
                 return result;

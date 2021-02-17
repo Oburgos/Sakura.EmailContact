@@ -27,7 +27,7 @@ namespace Sakura.EmailContact.Tests
             var unitOfWork = new Mock<IUnitOfWork>();
             var repository = new Mock<IRepository<Contact>>();
             unitOfWork.Setup(e => e.GetRepository<Contact>()).Returns(repository.Object);
-            var appService = new ContactsAppService(unitOfWork.Object);
+            var appService = new ContactsAppService(unitOfWork.Object, null);
             var createDto = new AddContactDto();
 
             //Act

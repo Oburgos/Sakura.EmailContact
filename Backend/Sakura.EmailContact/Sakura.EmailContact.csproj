@@ -28,5 +28,6 @@
     <Folder Include="Features\Campaigns\" />
     <Folder Include="Features\Campaigns\Dtos\" />
     <Folder Include="Features\EmailTemplates\" />
+    <Folder Include="Features\Common\Annotations\" />
   </ItemGroup>
 </Project>
