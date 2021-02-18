@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Hangfire;
+using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sakura.EmailContact.Features.BackgroudJobs;
 using Sakura.EmailContact.Features.Campaigns;
 using Sakura.EmailContact.Features.Contacts;
 using Sakura.EmailContact.Infrastructure;
@@ -73,6 +76,12 @@ namespace Sakura.EmailContact
                                             });
             });
 
+            services.AddHangfire(config =>
+                config.UsePostgreSqlStorage(Configuration.GetConnectionString("EmailContactDbPostgres"), new PostgreSqlStorageOptions {
+                    SchemaName = "HangFire"
+                }));
+
+            services.AddTransient<IBackgroundJobManager, BackgroundJobManagerHangFire>();
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ContactsAppService>();
             services.AddTransient<CampaignAppService>();
@@ -109,6 +118,10 @@ namespace Sakura.EmailContact
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseHangfireServer(new BackgroundJobServerOptions {
+                 
+            });
+            app.UseHangfireDashboard();
 
             app.UseAuthentication();
             app.UseAuthorization();
