@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sakura.EmailContact.Features.Campaigns;
 using Sakura.EmailContact.Features.Contacts;
 using Sakura.EmailContact.Infrastructure;
 using Sakura.EmailContact.Infrastructure.Core;
@@ -74,6 +75,7 @@ namespace Sakura.EmailContact
 
             services.AddAutoMapper(typeof(Startup));
             services.AddTransient<ContactsAppService>();
+            services.AddTransient<CampaignAppService>();
 
             ConfigureSecurity(services);
         }

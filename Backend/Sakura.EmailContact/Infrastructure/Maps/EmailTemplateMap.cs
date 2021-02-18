@@ -13,7 +13,6 @@ namespace Sakura.EmailContact.Infrastructure.Maps
         {
             builder.Property(p => p.Name).HasMaxLength(150).IsRequired();
             builder.Property(p => p.AwsTemplateId).HasMaxLength(50).IsRequired();
-            builder.Property(p => p.Subject).HasMaxLength(200).IsRequired();
             builder.Property(p => p.Body).IsRequired();
         }
     }

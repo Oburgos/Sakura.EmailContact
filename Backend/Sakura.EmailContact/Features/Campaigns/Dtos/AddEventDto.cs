@@ -6,4 +6,10 @@ namespace Sakura.EmailContact.Features.Campaigns.Dtos
     {
         public DateTime Date { get; set; }
     }
+
+    public class EventDto
+    {
+        public DateTime Date { get; set; }
+        public DateTime Hour { get; set; }
+    }
 }

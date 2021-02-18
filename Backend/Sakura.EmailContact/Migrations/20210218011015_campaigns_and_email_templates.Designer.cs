@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Sakura.EmailContact.Infrastructure;
@@ -9,9 +10,10 @@ using Sakura.EmailContact.Infrastructure;
 namespace Sakura.EmailContact.Migrations
 {
     [DbContext(typeof(EmailContactDbContext))]
-    partial class EmailContactDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210218011015_campaigns_and_email_templates")]
+    partial class campaigns_and_email_templates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

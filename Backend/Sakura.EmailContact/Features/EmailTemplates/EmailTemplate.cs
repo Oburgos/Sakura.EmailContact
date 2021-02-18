@@ -13,7 +13,6 @@ namespace Sakura.EmailContact.Features.EmailTemplates
 
         public string Name { get; set; }
         public string AwsTemplateId { get; set; }
-        public string Subject { get; set; }
         public string Body { get; set; }
         public List<Campaign> Campaigns { get; set; } = new List<Campaign>();
     }

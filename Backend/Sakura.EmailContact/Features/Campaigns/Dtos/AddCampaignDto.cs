@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Sakura.EmailContact.Features.Common.Annotations;
+using Sakura.EmailContact.Features.Contacts.Dtos;
 
 namespace Sakura.EmailContact.Features.Campaigns.Dtos
 {
@@ -24,5 +25,33 @@ namespace Sakura.EmailContact.Features.Campaigns.Dtos
 
         [MinimumOneElementRequired(ErrorMessage = Messages.AddCampaignDto_ContactLists_MinimumOneElementRequired)]
         public List<int> ContactLists { get; set; } = new List<int>();
+
+
+        public Campaign CreateEntity()
+        {
+            var campaign = new Campaign
+            {
+                Name = Name,
+                EmailTemplateId = EmailTemplateId,
+            };
+
+            foreach (var @event in Events)
+            {
+                campaign.AddEvent(@event.Date);
+            }
+            return campaign;
+        }
+    }
+
+    public class CampaignDto
+    {
+        public CampaignDto()
+        {
+        }
+
+        public int Id { get; internal set; }
+        public string Name { get; set; }
+        public List<EventDto> Events { get; set; } = new List<EventDto>();
+        public List<ContactListDto> ContactLists { get; set; } = new List<ContactListDto>();
     }
 }
