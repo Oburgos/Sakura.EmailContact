@@ -84,7 +84,9 @@ namespace Sakura.EmailContact
                 }));
 
             services.AddTransient<AmazonSimpleEmailServiceClient>(r => {
-                return new AmazonSimpleEmailServiceClient("", "", Amazon.RegionEndpoint.USEast1);
+                return new AmazonSimpleEmailServiceClient(Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"),
+                                                          Environment.GetEnvironmentVariable("AWS_SECRET_KEY"),
+                                                          Environment.GetEnvironmentVariable("AWS_REGION"));
             });
 
 
