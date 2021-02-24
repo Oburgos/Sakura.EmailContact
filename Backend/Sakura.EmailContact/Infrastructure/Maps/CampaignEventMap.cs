@@ -5,7 +5,7 @@ namespace Sakura.EmailContact.Infrastructure.Maps
 {
     public class CampaignEventMap : BaseMap<CampaignEvent>
     {
-        public CampaignEventMap() : base("Campaigns")
+        public CampaignEventMap() : base("CampaignEvents")
         {
         }
 
@@ -13,7 +13,7 @@ namespace Sakura.EmailContact.Infrastructure.Maps
         {
             builder.Property(p => p.CampaignId).IsRequired();
             builder.Property(p => p.Date).IsRequired();
-            builder.Property(p => p.Date).IsRequired();
+            builder.Property(p => p.Hour).IsRequired();
             builder.Property(p => p.ScheduleJobId).IsRequired().HasMaxLength(200);
             builder.HasOne(p => p.Campaign).WithMany(c => c.Events).HasForeignKey(c => c.CampaignId);
         }

@@ -5,7 +5,7 @@ namespace Sakura.EmailContact.Infrastructure.Maps
 {
     public class CampaignMap : BaseMap<Campaign>
     {
-        public CampaignMap() : base("CampaignEvents")
+        public CampaignMap() : base("Campaigns")
         {
         }
 

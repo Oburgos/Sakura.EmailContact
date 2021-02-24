@@ -40,8 +40,10 @@ namespace Sakura.EmailContact.Features.Campaigns.Sender
                                                 {
                                                     Name = co.Name,
                                                     Email = co.Email,
-                                                }).Distinct().ToList()
+                                                }).ToList()
                                 }).FirstAsync();
+
+            campaignData.Contacts = campaignData.Contacts.Distinct().ToList();
 
             while (campaignData.Contacts.Any())
             {
@@ -62,13 +64,15 @@ namespace Sakura.EmailContact.Features.Campaigns.Sender
         {
             var request = new SendBulkTemplatedEmailRequest
             {
+                Source = Environment.GetEnvironmentVariable("AWS_SES_EMAIL_ACCOUNT"),
                 Template = bulkEmail.EmailTemplateId,
+                DefaultTemplateData = JsonConvert.SerializeObject(new { name = "user" }),
                 Destinations = new List<BulkEmailDestination>()
             };
 
             foreach (var item in bulkEmail.Contacts)
             {
-                var templateData = new { item.Name };
+                var templateData = new { name = item.Name };
                 request.Destinations.Add(new BulkEmailDestination {
                      ReplacementTemplateData = JsonConvert.SerializeObject(templateData),
                      Destination = new Destination

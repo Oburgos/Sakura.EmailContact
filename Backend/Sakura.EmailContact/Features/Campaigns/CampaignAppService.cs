@@ -35,6 +35,7 @@ namespace Sakura.EmailContact.Features.Campaigns
             List<ContactList> lists = _unitOfWork.GetRepository<ContactList>().AsQueryable().Where(c => newCampaignDto.ContactLists.Contains(c.Id)).ToList();
             campaign.AddList(lists);
 
+            await _unitOfWork.BeginTransactionAsync();
 
             await _unitOfWork.GetRepository<Campaign>().AddAsync(campaign);
             await _unitOfWork.SaveChangesAsync();
@@ -43,7 +44,9 @@ namespace Sakura.EmailContact.Features.Campaigns
             {
                 e.ScheduleJobId = _backgroundJobManager.Schedule<EmailCampaignSender>(s => s.SendCampaign(campaign.Id), e.Hour);
             });
-           
+
+            await _unitOfWork.SaveChangesAsync();
+             _unitOfWork.Commit();
 
             var dto = (from c in _unitOfWork.GetRepository<Campaign>().AsQueryable()
                        where c.Id == campaign.Id

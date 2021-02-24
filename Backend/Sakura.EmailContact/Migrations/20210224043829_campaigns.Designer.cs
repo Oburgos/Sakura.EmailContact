@@ -10,8 +10,8 @@ using Sakura.EmailContact.Infrastructure;
 namespace Sakura.EmailContact.Migrations
 {
     [DbContext(typeof(EmailContactDbContext))]
-    [Migration("20210224031728_job-id-campaign-event")]
-    partial class jobidcampaignevent
+    [Migration("20210224043829_campaigns")]
+    partial class campaigns
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,7 +81,7 @@ namespace Sakura.EmailContact.Migrations
 
                     b.HasIndex("EmailTemplateId");
 
-                    b.ToTable("CampaignEvents");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("Sakura.EmailContact.Features.Campaigns.CampaignEvent", b =>
@@ -120,7 +120,7 @@ namespace Sakura.EmailContact.Migrations
 
                     b.HasIndex("CampaignId");
 
-                    b.ToTable("Campaigns");
+                    b.ToTable("CampaignEvents");
                 });
 
             modelBuilder.Entity("Sakura.EmailContact.Features.Contacts.Contact", b =>

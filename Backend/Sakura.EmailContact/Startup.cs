@@ -83,10 +83,14 @@ namespace Sakura.EmailContact
                     SchemaName = "HangFire"
                 }));
 
+            
+
+
             services.AddTransient<AmazonSimpleEmailServiceClient>(r => {
                 return new AmazonSimpleEmailServiceClient(Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"),
                                                           Environment.GetEnvironmentVariable("AWS_SECRET_KEY"),
-                                                          Environment.GetEnvironmentVariable("AWS_REGION"));
+                                                          Amazon.RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_REGION"))
+                                                          );
             });
 
 

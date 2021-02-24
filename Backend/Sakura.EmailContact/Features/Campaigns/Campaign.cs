@@ -26,7 +26,8 @@ namespace Sakura.EmailContact.Features.Campaigns
             CampaignEvent @event = new CampaignEvent
             {
                 Date = date.Date,
-                Hour = date
+                Hour = date,
+                ScheduleJobId = ""
             };
             bool exists = Events.Any(e => e.Date == @event.Date && e.Hour == @event.Hour);
             if (exists)

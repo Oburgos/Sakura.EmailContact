@@ -79,7 +79,7 @@ namespace Sakura.EmailContact.Migrations
 
                     b.HasIndex("EmailTemplateId");
 
-                    b.ToTable("CampaignEvents");
+                    b.ToTable("Campaigns");
                 });
 
             modelBuilder.Entity("Sakura.EmailContact.Features.Campaigns.CampaignEvent", b =>
@@ -118,7 +118,7 @@ namespace Sakura.EmailContact.Migrations
 
                     b.HasIndex("CampaignId");
 
-                    b.ToTable("Campaigns");
+                    b.ToTable("CampaignEvents");
                 });
 
             modelBuilder.Entity("Sakura.EmailContact.Features.Contacts.Contact", b =>
