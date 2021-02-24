@@ -109,6 +109,11 @@ namespace Sakura.EmailContact.Migrations
                     b.Property<DateTime>("Hour")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("ScheduleJobId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CampaignId");
