@@ -6,7 +6,7 @@ namespace Sakura.EmailContact.Features.BackgroudJobs
 {
     public interface IBackgroundJobManager
     {
-        string Enqueue<T>(Expression<Action<T>> methodCall);
+        string Enqueue<T>(Expression<Func<T, Task>> methodCall);
         string Schedule<T>(Expression<Func<T, Task>> methodCall, DateTime enqueueAt);
     }
 }

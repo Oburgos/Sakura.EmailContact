@@ -14,5 +14,6 @@ namespace Sakura.EmailContact.Features.Campaigns
 
         public int CampaignId { get; set; }
         public Campaign Campaign { get; set; }
+        public string ScheduleJobId { get; internal set; }
     }
 }

@@ -10,6 +10,8 @@ using Sakura.EmailContact.Infrastructure.Core;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Sakura.EmailContact.Features.BackgroudJobs;
+using System.Linq.Expressions;
 
 namespace Sakura.EmailContact.Tests
 {
@@ -47,9 +49,11 @@ namespace Sakura.EmailContact.Tests
             unitOfWork.Setup(e => e.GetRepository<ContactList>()).Returns(contactListsRepository.Object);
             unitOfWork.Setup(e => e.GetRepository<Campaign>()).Returns(campaignRepository.Object);
 
+            var jobManager = new Mock<IBackgroundJobManager>();
+            jobManager.Setup(s => s.Enqueue<It.IsAnyType>(It.IsAny<Expression<Action<It.IsAnyType>>>())).Returns(Guid.NewGuid().ToString());
+            jobManager.Setup(s => s.Schedule<It.IsAnyType>(It.IsAny<Expression<Func<It.IsAnyType, Task>>>(), It.IsAny<DateTime>())).Returns(Guid.NewGuid().ToString());
 
-
-            return new CampaignAppService(unitOfWork.Object);
+            return new CampaignAppService(unitOfWork.Object, jobManager.Object);
         }
 
         [TestMethod]
@@ -150,6 +154,39 @@ namespace Sakura.EmailContact.Tests
             Assert.AreEqual(expected: 1, result.Data.Events.Count);
             Assert.AreEqual(expected: newCampaignDto.Events.First().Date.Date, result.Data.Events.First().Date);
             Assert.AreEqual(expected: newCampaignDto.Events.First().Date, result.Data.Events.First().Hour);
+        }
+
+        [TestMethod]
+        public async Task Campaign_Create_CreateCampaignAndAddJobIdToEvents()
+        {
+            var appService = BuildAppService();
+            var newCampaignDto = new AddCampaignDto()
+            {
+                Name = "New 123",
+                EmailTemplateId = 1,
+                Events = new List<AddEventDto>
+                {
+                    new AddEventDto
+                    {
+                         Date = DateTime.Now.AddDays(5)
+                    },
+                    new AddEventDto
+                    {
+                         Date = DateTime.Now.AddDays(8)
+                    }
+                },
+                ContactLists = new List<int>
+                {
+                    1
+                }
+            };
+
+            EntityResponse<CampaignDto> result = await appService.CreateCampaignAsync(newCampaignDto);
+            Assert.AreEqual(expected: true, result.Ok);
+            foreach (var item in result.Data.Events)
+            {
+                Assert.AreEqual(expected: false, string.IsNullOrWhiteSpace(item.ScheduleJobId));
+            }
         }
     }
 }

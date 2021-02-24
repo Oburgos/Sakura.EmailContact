@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Amazon.SimpleEmail;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -15,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sakura.EmailContact.Features.BackgroudJobs;
 using Sakura.EmailContact.Features.Campaigns;
+using Sakura.EmailContact.Features.Campaigns.Sender;
 using Sakura.EmailContact.Features.Contacts;
 using Sakura.EmailContact.Infrastructure;
 using Sakura.EmailContact.Infrastructure.Core;
@@ -81,8 +83,14 @@ namespace Sakura.EmailContact
                     SchemaName = "HangFire"
                 }));
 
+            services.AddTransient<AmazonSimpleEmailServiceClient>(r => {
+                return new AmazonSimpleEmailServiceClient("", "", Amazon.RegionEndpoint.USEast1);
+            });
+
+
             services.AddTransient<IBackgroundJobManager, BackgroundJobManagerHangFire>();
             services.AddAutoMapper(typeof(Startup));
+            services.AddTransient<EmailCampaignSender>();
             services.AddTransient<ContactsAppService>();
             services.AddTransient<CampaignAppService>();
 

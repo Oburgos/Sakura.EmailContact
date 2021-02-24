@@ -7,7 +7,7 @@ namespace Sakura.EmailContact.Features.BackgroudJobs
     public class BackgroundJobManagerHangFire : IBackgroundJobManager
     {
 
-        public string Enqueue<T>(Expression<Action<T>> methodCall)
+        public string Enqueue<T>(Expression<Func<T, Task>> methodCall)
         {
             return Hangfire.BackgroundJob.Enqueue<T>(methodCall);
         }
