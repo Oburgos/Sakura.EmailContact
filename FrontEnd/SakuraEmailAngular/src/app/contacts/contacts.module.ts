@@ -7,6 +7,7 @@ import { ContactsRoutingModule } from './contacts-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MaterialModule } from '../material/material.module';
 import { MatTableModule } from '@angular/material/table';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatTableModule } from '@angular/material/table';
     SharedModule,
     MaterialModule,
     MatTableModule,
+    ReactiveFormsModule,
   ],
 })
 export class ContactsModule {}

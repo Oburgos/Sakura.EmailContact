@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { ContactsTableComponent } from '../contacts-table/contacts-table.component';
 
 @Component({
   selector: 'app-contacts-page',
@@ -8,6 +9,8 @@ import { ContactFormComponent } from '../contact-form/contact-form.component';
   styleUrls: ['./contacts-page.component.scss'],
 })
 export class ContactsPageComponent implements OnInit {
+  @ViewChild(ContactsTableComponent) table!: ContactsTableComponent;
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
@@ -15,7 +18,15 @@ export class ContactsPageComponent implements OnInit {
   openAddContactDialog() {
     const dialogRef = this.dialog.open(ContactFormComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      if (result == null) {
+        return;
+      }
+
+      this.refreshContacts();
     });
+  }
+
+  refreshContacts() {
+    this.table.load();
   }
 }

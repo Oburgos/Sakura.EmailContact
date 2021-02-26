@@ -1,1 +1,43 @@
-<p>contact-form works!</p>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+<h2 mat-dialog-title>Add Contact</h2>
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="form" class="flex-column">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        placeholder="Omar Burgos"
+        formControlName="name"
+        required
+      />
+      <mat-error *ngIf="form.controls.name.invalid">
+        {{ getErrorMessage("name") }}
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        formControlName="email"
+        required
+      />
+      <mat-error *ngIf="form.controls.email.invalid">
+        {{ getErrorMessage("email") }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <mat-error *ngIf="apiError"> {{ apiError }} </mat-error>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close [disabled]="isLoading">Cancel</button>
+  <button
+    (click)="submit()"
+    mat-button
+    [disabled]="form.invalid || isLoading"
+    cdkFocusInitial
+  >
+    Save
+  </button>
+</mat-dialog-actions>
