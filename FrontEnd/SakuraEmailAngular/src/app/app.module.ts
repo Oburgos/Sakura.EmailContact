@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { MenuComponent } from './shared/menu/menu.component';
+import { PageLayoutComponent } from './shared/page-layout/page-layout.component';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent],
+  declarations: [AppComponent, MenuComponent, PageLayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

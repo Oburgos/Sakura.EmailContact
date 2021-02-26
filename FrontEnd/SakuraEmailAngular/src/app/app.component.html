@@ -1,6 +1,6 @@
 <mat-toolbar
   color="primary"
-  class="mat-elevation-z6 custom-shadow"
+  class="mat-elevation-z6 custom-shadow toolbar-color"
   id="main-toolbar"
 >
   <button
@@ -32,10 +32,15 @@
   >
     <app-menu></app-menu>
   </mat-sidenav>
-  <mat-sidenav-content class="top-74">
-    <div style="padding-left: 10px">
-      ss
-      <router-outlet></router-outlet>
-    </div>
+  <mat-sidenav-content style="background-color: #f5f5f8; padding-top: 64px">
+    <app-page-layout>
+      <div toolbar-options>
+        <h1>Hola</h1>
+      </div>
+      <div page-content>
+        <span>hi</span>
+      </div>
+    </app-page-layout>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,0 +1,11 @@
+<mat-toolbar color="primary" class="toolbar-color">
+  <mat-toolbar-row>
+    <ng-content select="[toolbar-options]"></ng-content>
+  </mat-toolbar-row>
+  <mat-toolbar-row> </mat-toolbar-row>
+</mat-toolbar>
+<div class="body">
+  <mat-card class="card-shadow">
+    <ng-content select="[page-content]"></ng-content>
+  </mat-card>
+</div>
