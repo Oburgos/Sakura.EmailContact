@@ -33,6 +33,12 @@ namespace Sakura.EmailContact.Features.Contacts
                 return result;
             }
 
+            bool alreadyExists = _contactRepository.AsQueryable().Any(e => e.Email == newContactDto.Email);
+            if (alreadyExists)
+            {
+                return EntityResponse.CreateError("The email already exists.", "E0004").As<ContactDto>();
+            }
+
             Contact contact = newContactDto.CreateEntity();
             await _contactRepository.AddAsync(contact);
             await unitOfWork.SaveChangesAsync();

@@ -19,7 +19,7 @@ namespace Sakura.EmailContact.Features.Contacts.Dtos
         {
             return new Contact
             {
-                Email = Email,
+                Email = Email.ToLower(),
                 Name = Name
             };
         }
