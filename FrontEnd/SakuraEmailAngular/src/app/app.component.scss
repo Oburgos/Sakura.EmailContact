@@ -1,0 +1,28 @@
+#main {
+  height: 100%;
+}
+
+#main-toolbar {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+}
+
+.top-74 {
+  padding-top: 74px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-toolbar-panel-headers-align {
+  .mat-expansion-panel-header-description {
+    justify-content: flex-end;
+  }
+}
