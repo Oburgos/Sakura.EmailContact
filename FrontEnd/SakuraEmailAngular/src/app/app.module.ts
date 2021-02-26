@@ -10,15 +10,17 @@ import { PageLayoutComponent } from './shared/page-layout/page-layout.component'
 import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './api/api.module';
 import { environment } from 'src/environments/environment';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, MenuComponent, PageLayoutComponent],
+  declarations: [AppComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    SharedModule,
     ApiModule.forRoot({ rootUrl: environment.Api }),
   ],
   providers: [],

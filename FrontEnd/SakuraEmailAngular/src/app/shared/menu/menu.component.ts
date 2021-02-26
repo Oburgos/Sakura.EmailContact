@@ -13,6 +13,11 @@ export class MenuComponent implements OnInit {
       icon: 'contacts',
       options: [
         {
+          icon: 'person_add',
+          title: 'Contact',
+          link: '/contacts',
+        },
+        {
           icon: 'group_add',
           title: 'Lists',
           link: '',
