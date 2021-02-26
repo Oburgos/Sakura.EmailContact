@@ -38,6 +38,15 @@ namespace Sakura.EmailContact
 
             services.AddControllers();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "allow",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+                                  });
+            });
+
             services.AddDbContext<EmailContactDbContext>(options => {
                 options.UseNpgsql(Configuration.GetConnectionString("EmailContactDbPostgres"));
             });
@@ -139,6 +148,8 @@ namespace Sakura.EmailContact
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("allow");
 
             app.UseEndpoints(endpoints =>
             {
