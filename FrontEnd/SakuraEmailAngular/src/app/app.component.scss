@@ -15,14 +15,3 @@
 .example-spacer {
   flex: 1 1 auto;
 }
-
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.main-toolbar-panel-headers-align {
-  .mat-expansion-panel-header-description {
-    justify-content: flex-end;
-  }
-}
