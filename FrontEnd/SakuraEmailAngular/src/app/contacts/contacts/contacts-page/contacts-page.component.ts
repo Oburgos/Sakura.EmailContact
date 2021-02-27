@@ -21,7 +21,6 @@ export class ContactsPageComponent implements OnInit {
       if (result == null) {
         return;
       }
-
       this.refreshContacts();
     });
   }

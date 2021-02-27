@@ -16,3 +16,8 @@
 .no-shadow {
   box-shadow: none;
 }
+
+.menu-container {
+  height: calc(100% - 74px);
+  padding-top: 74px;
+}

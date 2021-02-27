@@ -194,6 +194,87 @@ export class ContactsService extends BaseService {
   }
 
   /**
+   * Path part for operation apiContactsListsGet
+   */
+  static readonly ApiContactsListsGetPath = '/api/Contacts/lists';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiContactsListsGet$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiContactsListsGet$Plain$Response(params?: {
+  }): Observable<StrictHttpResponse<Array<ContactListDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ContactsService.ApiContactsListsGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: 'text/plain'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<ContactListDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiContactsListsGet$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiContactsListsGet$Plain(params?: {
+  }): Observable<Array<ContactListDto>> {
+
+    return this.apiContactsListsGet$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<ContactListDto>>) => r.body as Array<ContactListDto>)
+    );
+  }
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `apiContactsListsGet$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiContactsListsGet$Json$Response(params?: {
+  }): Observable<StrictHttpResponse<Array<ContactListDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, ContactsService.ApiContactsListsGetPath, 'get');
+    if (params) {
+    }
+
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'text/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<ContactListDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `apiContactsListsGet$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  apiContactsListsGet$Json(params?: {
+  }): Observable<Array<ContactListDto>> {
+
+    return this.apiContactsListsGet$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<ContactListDto>>) => r.body as Array<ContactListDto>)
+    );
+  }
+
+  /**
    * Path part for operation apiContactsListsPost
    */
   static readonly ApiContactsListsPostPath = '/api/Contacts/lists';

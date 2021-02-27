@@ -1,24 +1,26 @@
-<mat-accordion class="main-toolbar-panel-headers-align" multi>
-  <mat-expansion-panel class="no-shadow" *ngFor="let item of menu">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        <mat-icon color="primary">{{ item.icon }}</mat-icon>
-      </mat-panel-title>
-      <mat-panel-description> {{ item.title }} </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-list role="list">
-      <a
-        style="text-decoration: none"
-        mat-list-item
-        mat-ripple
-        [routerLink]="subItem.link"
-        *ngFor="let subItem of item.options"
-      >
-        <div class="main-toolbar-list-item">
-          <mat-icon color="secondary"> {{ subItem.icon }}</mat-icon>
-          <span> {{ subItem.title }} </span>
-        </div>
-      </a>
-    </mat-list>
-  </mat-expansion-panel>
-</mat-accordion>
+<div class="menu-container">
+  <mat-accordion class="main-toolbar-panel-headers-align" multi>
+    <mat-expansion-panel class="no-shadow" *ngFor="let item of menu">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon color="primary">{{ item.icon }}</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description> {{ item.title }} </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-list role="list">
+        <a
+          style="text-decoration: none"
+          mat-list-item
+          mat-ripple
+          [routerLink]="subItem.link"
+          *ngFor="let subItem of item.options"
+        >
+          <div class="main-toolbar-list-item">
+            <mat-icon color="secondary"> {{ subItem.icon }}</mat-icon>
+            <span> {{ subItem.title }} </span>
+          </div>
+        </a>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

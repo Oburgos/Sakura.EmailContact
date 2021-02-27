@@ -1,0 +1,84 @@
+<mat-card-content>
+  <mat-progress-bar
+    class="mb-10"
+    *ngIf="isLoading"
+    mode="indeterminate"
+  ></mat-progress-bar>
+
+  <h2>{{ title }}</h2>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Name of the list</mat-label>
+      <input
+        matInput
+        placeholder="Platinum Clients"
+        formControlName="name"
+        required
+      />
+      <mat-error *ngIf="form.controls.name.invalid">
+        {{ getErrorMessage("name") }}
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <table mat-table [dataSource]="dataSource">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+      (click)="selection.toggle(row)"
+    ></tr>
+  </table>
+</mat-card-content>
+
+<mat-card-footer align="end">
+  <button
+    mat-raised-button
+    color="warm"
+    (click)="cancelClick()"
+    [disabled]="isLoading"
+  >
+    Cancel
+  </button>
+  <button
+    type="button"
+    (click)="submit()"
+    mat-raised-button
+    color="primary"
+    [disabled]="form.invalid || selection.selected.length == 0 || isLoading"
+    class="m-10"
+  >
+    Save
+  </button>
+</mat-card-footer>

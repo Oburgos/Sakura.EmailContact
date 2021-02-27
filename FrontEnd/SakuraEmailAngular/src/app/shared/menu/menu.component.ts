@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
         {
           icon: 'group_add',
           title: 'Lists',
-          link: '',
+          link: '/contacts/lists',
         },
       ],
     },

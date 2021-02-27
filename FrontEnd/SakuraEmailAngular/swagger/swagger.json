@@ -175,6 +175,40 @@
             }
           }
         }
+      },
+      "get": {
+        "tags": ["Contacts"],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactListDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactListDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContactListDto"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/Contacts/lists/{listId}/contacts": {

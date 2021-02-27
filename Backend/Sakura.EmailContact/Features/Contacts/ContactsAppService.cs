@@ -122,5 +122,24 @@ namespace Sakura.EmailContact.Features.Contacts
                             }).FirstOrDefaultAsync();
             return response;
         }
+
+        public async Task<List<ContactListDto>> GetContactListsAsync()
+        {
+            var response = await (from list in _contactListRepository.AsQueryable()
+                                  where list.Active
+                                  select new ContactListDto
+                                  {
+                                      Id = list.Id,
+                                      Name = list.Name,
+                                      Contacts = (from c in list.Contacts
+                                                  select new ContactDto
+                                                  {
+                                                      Id = c.Id,
+                                                      Name = c.Name,
+                                                      Email = c.Email
+                                                  }).ToList()
+                                  }).ToListAsync();
+            return response;
+        }
     }
 }

@@ -67,5 +67,12 @@ namespace Sakura.EmailContact.Features.Contacts
             var result = await _contactsAppService.GetContactListAsync(id);
             return result;
         }
+
+        [HttpGet("lists")]
+        public async Task<ActionResult<List<ContactListDto>>> GetContactListsAsync()
+        {
+            var result = await _contactsAppService.GetContactListsAsync();
+            return result;
+        }
     }
 }
