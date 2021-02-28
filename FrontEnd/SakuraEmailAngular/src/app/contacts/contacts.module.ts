@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ContactListFormComponent } from './contact-lists/contact-list-form/contact-list-form.component';
 import { ContactListsPageComponent } from './contact-lists/contact-lists-page/contact-lists-page.component';
 import { ContactListsTableComponent } from './contact-lists/contact-lists-table/contact-lists-table.component';
+import { EmailTemplatesModule } from '../email-templates/email-templates.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ContactListsTableComponent } from './contact-lists/contact-lists-table/
     MaterialModule,
     MatTableModule,
     ReactiveFormsModule,
+    EmailTemplatesModule,
   ],
 })
 export class ContactsModule {}
