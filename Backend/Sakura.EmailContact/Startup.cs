@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Amazon.S3;
 using Amazon.SimpleEmail;
 using Hangfire;
 using Hangfire.PostgreSql;
@@ -92,14 +93,18 @@ namespace Sakura.EmailContact
                     SchemaName = "HangFire"
                 }));
 
-            
-
-
             services.AddTransient<AmazonSimpleEmailServiceClient>(r => {
                 return new AmazonSimpleEmailServiceClient(Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"),
                                                           Environment.GetEnvironmentVariable("AWS_SECRET_KEY"),
                                                           Amazon.RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_REGION"))
                                                           );
+            });
+
+            services.AddTransient<IAmazonS3>(r => {
+                return new AmazonS3Client(Environment.GetEnvironmentVariable("AWS_ACCESS_KEY"),
+                                         Environment.GetEnvironmentVariable("AWS_SECRET_KEY"),
+                                         Amazon.RegionEndpoint.GetBySystemName(Environment.GetEnvironmentVariable("AWS_REGION"))
+                                        );
             });
 
 
