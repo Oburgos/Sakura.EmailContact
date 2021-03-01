@@ -31,12 +31,12 @@ export class MenuComponent implements OnInit {
         {
           icon: 'subject',
           title: 'All',
-          link: '',
+          link: '/campaigns',
         },
         {
           icon: 'schedule_send',
           title: 'New',
-          link: '',
+          link: '/campaigns',
         },
       ],
     },

@@ -10,6 +10,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./contacts/contacts.module').then((m) => m.ContactsModule),
       },
+      {
+        path: 'campaigns',
+        loadChildren: () =>
+          import('./campaigns/campaigns.module').then((m) => m.CampaignsModule),
+      },
     ],
   },
 ];

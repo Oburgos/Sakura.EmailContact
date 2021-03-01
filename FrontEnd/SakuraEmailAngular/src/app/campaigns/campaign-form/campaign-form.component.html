@@ -1,0 +1,55 @@
+<mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="templateForm">
+    <form [formGroup]="templateForm">
+      <ng-template matStepLabel>Template</ng-template>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Email Subject</mat-label>
+        <input
+          matInput
+          placeholder="Example: Hello Mr."
+          formControlName="html"
+        />
+      </mat-form-field>
+
+      <app-email-template-builder></app-email-template-builder>
+
+      <div align="end" class="m-10">
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="contactListsForm">
+    <form [formGroup]="contactListsForm">
+      <ng-template matStepLabel>Contacts</ng-template>
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input
+          matInput
+          formControlName="contacts"
+          placeholder="Ex. 1 Main St, New York, NY"
+          required
+        />
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Events</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
