@@ -1,3 +1,12 @@
+<swal
+  #infoSwal
+  title="Select a contact list"
+  text="You must to select one or more list of contacts"
+  icon="info"
+  [showCancelButton]="false"
+  [focusCancel]="true"
+>
+</swal>
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="templateForm">
     <form [formGroup]="templateForm">
@@ -17,7 +26,7 @@
         <button
           mat-raised-button
           color="primary"
-          (click)="tabContactNexClick()"
+          (click)="tabTemplateNexClick()"
         >
           Next
         </button>
@@ -26,19 +35,19 @@
   </mat-step>
   <mat-step [stepControl]="contactListsForm">
     <form [formGroup]="contactListsForm">
-      <ng-template matStepLabel>Contacts</ng-template>
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input
-          matInput
-          formControlName="contacts"
-          placeholder="Ex. 1 Main St, New York, NY"
-          required
-        />
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <ng-template matStepLabel>Contact Lists</ng-template>
+
+      <span> Select the contact lists that you want to send the mail: </span>
+      <app-contact-lists-table #contactListTable></app-contact-lists-table>
+
+      <div align="end" class="m-10">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="tabContactListNexClick()"
+        >
+          Next
+        </button>
       </div>
     </form>
   </mat-step>

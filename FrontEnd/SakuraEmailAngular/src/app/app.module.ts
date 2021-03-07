@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './api/api.module';
 import { environment } from 'src/environments/environment';
 import { SharedModule } from './shared/shared.module';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [AppComponent, MenuComponent],
@@ -21,6 +22,7 @@ import { SharedModule } from './shared/shared.module';
     MaterialModule,
     HttpClientModule,
     SharedModule,
+    SweetAlert2Module.forRoot(),
     ApiModule.forRoot({ rootUrl: environment.Api }),
   ],
   providers: [],

@@ -8,9 +8,16 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { EmailTemplatesModule } from '../email-templates/email-templates.module';
+import { ContactListsTableComponent } from './contact-lists-table/contact-lists-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
-  declarations: [CampaignFormComponent, CampaignsPageComponent],
+  declarations: [
+    CampaignFormComponent,
+    CampaignsPageComponent,
+    ContactListsTableComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -19,6 +26,8 @@ import { EmailTemplatesModule } from '../email-templates/email-templates.module'
     ReactiveFormsModule,
     MaterialModule,
     EmailTemplatesModule,
+    MatTableModule,
+    SweetAlert2Module,
   ],
 })
 export class CampaignsModule {}
