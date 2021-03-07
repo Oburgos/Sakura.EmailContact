@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
+import { EmailTemplateBuilderComponent } from 'src/app/email-templates/email-template-builder/email-template-builder.component';
 
 @Component({
   selector: 'app-campaign-form',
@@ -7,6 +9,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./campaign-form.component.scss'],
 })
 export class CampaignFormComponent implements OnInit {
+  @ViewChild('templateBuilder', { static: true })
+  templateBuilder!: EmailTemplateBuilderComponent;
+
+  @ViewChild('stepper', { static: true })
+  stepper!: MatStepper;
+
   templateForm: FormGroup;
   contactListsForm: FormGroup;
   campaignForm: FormGroup;
@@ -28,5 +36,16 @@ export class CampaignFormComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  tabContactNexClick() {
+    let template = this.templateBuilder.getData();
+    this.templateForm.controls.html.setValue(template.html);
+    this.templateForm.controls.mjml.setValue(template.mjml);
+    this.stepper.next();
+  }
+
+  ngOnInit() {
+    this.templateForm.patchValue({
+      contacts: 'Mary',
+    });
+  }
 }

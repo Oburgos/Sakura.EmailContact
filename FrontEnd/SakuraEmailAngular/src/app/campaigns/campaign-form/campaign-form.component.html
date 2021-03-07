@@ -7,14 +7,20 @@
         <input
           matInput
           placeholder="Example: Hello Mr."
-          formControlName="html"
+          formControlName="subject"
         />
       </mat-form-field>
 
-      <app-email-template-builder></app-email-template-builder>
+      <app-email-template-builder #templateBuilder></app-email-template-builder>
 
       <div align="end" class="m-10">
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="tabContactNexClick()"
+        >
+          Next
+        </button>
       </div>
     </form>
   </mat-step>

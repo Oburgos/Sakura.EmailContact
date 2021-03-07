@@ -31,10 +31,13 @@ export class EmailTemplateBuilderComponent
 
   ngOnInit(): void {}
 
-  checkInfo() {
-    let html = this.grapes.runCommand('mjml-get-code');
+  getData() {
+    let html = this.grapes.runCommand('mjml-get-code').html;
     let mjml = this.grapes.getHtml();
-    console.log(html, mjml);
+    return {
+      html,
+      mjml,
+    };
   }
 
   ngAfterViewInit(): void {
