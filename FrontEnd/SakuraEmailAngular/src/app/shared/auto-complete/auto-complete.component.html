@@ -1,0 +1,18 @@
+<mat-form-field appearance="outline" [class]="class">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    placeholder="{{ placeholder }}"
+    matInput
+    [formControl]="internalControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+    <mat-option
+      *ngFor="let option of filteredOptions | async"
+      [value]="option[displayProperty]"
+    >
+      {{ option[displayProperty] }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
