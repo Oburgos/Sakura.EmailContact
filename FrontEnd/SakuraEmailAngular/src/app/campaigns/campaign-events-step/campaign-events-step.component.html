@@ -1,0 +1,20 @@
+<div class="event-form-container">
+  <mat-form-field appearance="outline" class="mr-10">
+    <mat-label>Date</mat-label>
+    <input matInput (click)="picker.open()" [matDatepicker]="picker" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Hour</mat-label>
+    <input matInput [ngxTimepicker]="timePicker" readonly />
+    <button (click)="timePicker.open()" matSuffix mat-icon-button>
+      <mat-icon>schedule</mat-icon>
+    </button>
+    <ngx-material-timepicker #timePicker></ngx-material-timepicker>
+  </mat-form-field>
+  <button class="add-event-button ml-10" mat-raised-button color="primary">
+    Add Event
+  </button>
+</div>

@@ -25,6 +25,7 @@
     "@sweetalert2/ngx-sweetalert2": "^9.0.0",
     "grapesjs": "^0.16.41",
     "grapesjs-mjml": "^0.5.2",
+    "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.15.5",
     "tslib": "^2.0.0",

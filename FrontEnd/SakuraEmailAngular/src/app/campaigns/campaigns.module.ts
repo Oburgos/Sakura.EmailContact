@@ -11,12 +11,15 @@ import { EmailTemplatesModule } from '../email-templates/email-templates.module'
 import { ContactListsTableComponent } from './contact-lists-table/contact-lists-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { CampaignEventsStepComponent } from './campaign-events-step/campaign-events-step.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
     CampaignFormComponent,
     CampaignsPageComponent,
     ContactListsTableComponent,
+    CampaignEventsStepComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     EmailTemplatesModule,
     MatTableModule,
     SweetAlert2Module,
+    NgxMaterialTimepickerModule,
   ],
 })
 export class CampaignsModule {}
